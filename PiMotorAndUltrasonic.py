@@ -10,12 +10,30 @@ GPIO.setmode(GPIO.BOARD)
 
 TRIG = 16
 ECHO = 18
+MOTOR1 = 11
+MOTOR2 = 12 
+ENA1 = 7
 # set up GPIO pins
 
 GPIO.setup(TRIG,GPIO.OUT)
 GPIO.setup(ECHO,GPIO.IN)
+GPIO.setup(MOTOR1,GPIO.OUT)
+GPIO.setup(MOTOR2,GPIO.OUT)
+GPIO.setup(ENA1,GPIO.OUT)
 
-def ultrasonic():
+def drive():
+  GPIO.output(ENA1, True)
+  GPIO.output(MOTOR1, True)
+  GPIO.output(MOTOR2, False)
+  time.sleep(5)
+  GPIO.output(MOTOR1, False)
+  GPIO.output(MOTOR2, True)
+  time.sleep(5)
+  GPIO.output(MOTOR1, True)
+  GPIO.output(MOTOR2, True)
+  
+
+def ultrasonic(): #measures distance using an ultrasonic sensor
   GPIO.output(TRIG, False)
   print("Waiting For Sensor To Settle")
   time.sleep(2)
@@ -40,3 +58,4 @@ def ultrasonic():
 # Wait 5 seconds
 time.sleep(5)
 ultrasonic()
+drive()
