@@ -1,4 +1,4 @@
-# **sees lines and tells direction, sees distance and tells stop** #
+# **sees lines and tells direction, sees distance and tells it to stop** #
 
 # Import required modules
 import RPi.GPIO as GPIO
