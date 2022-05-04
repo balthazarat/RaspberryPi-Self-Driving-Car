@@ -1,0 +1,11 @@
+** ultrasonic **
+trig -- gpio 24 --
+echo -- gpio 23 --
+** H-Bridge **
+in1 -- gpio 06 --
+in2 -- gpio 26 --
+in3 -- gpio 19 --
+in4 -- gpio 13 --
+for enable I need a 'dg411dj' to switch the ~pwm~ between the two pins
+en1 -- 
+en2 -- 
