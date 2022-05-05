@@ -1,3 +1,4 @@
+# script curently doesn't move motors but does not show errors, this is true for both the function and not. #
 # Import required modules
 from re import U
 import time
@@ -8,15 +9,15 @@ GPIO.setmode(GPIO.BCM)
 
 MOTOR1 = 6
 MOTOR2 = 26 
-ENA1 = 13
+# ENA1 = 13
 # set up GPIO pins
 
 GPIO.setup(MOTOR1,GPIO.OUT)
 GPIO.setup(MOTOR2,GPIO.OUT)
-GPIO.setup(ENA1,GPIO.OUT)
+# GPIO.setup(ENA1,GPIO.OUT)
 
 def drive():
-  GPIO.output(ENA1, True)
+  # GPIO.output(ENA1, True)
   GPIO.output(MOTOR1, True)
   GPIO.output(MOTOR2, False)
   time.sleep(5)
@@ -27,4 +28,8 @@ def drive():
   GPIO.output(MOTOR2, True)
   
 drive()
+# GPIO.output(ENA1, True)
+# GPIO.output(MOTOR1, True)
+# GPIO.output(MOTOR2, False)
+print("run motors")
 time.sleep(5)
