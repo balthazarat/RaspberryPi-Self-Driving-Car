@@ -7,29 +7,54 @@ import RPi.GPIO as GPIO
 # Declare the GPIO settings
 GPIO.setmode(GPIO.BCM)
 
-MOTOR1 = 6
-MOTOR2 = 26 
+MOTOR1 = 6 # LEFT
+MOTOR2 = 26 # LEFT
+MOTOR3 = 13 # RIGHT
+MOTOR4 = 19 # RIGHT
 # ENA1 = 13
 # set up GPIO pins
-
 GPIO.setup(MOTOR1,GPIO.OUT)
 GPIO.setup(MOTOR2,GPIO.OUT)
+GPIO.setup(MOTOR3,GPIO.OUT)
+GPIO.setup(MOTOR4,GPIO.OUT)
 # GPIO.setup(ENA1,GPIO.OUT)
-
-def drive():
-  # GPIO.output(ENA1, True)
+def leftForward():
   GPIO.output(MOTOR1, True)
   GPIO.output(MOTOR2, False)
-  time.sleep(5)
+  print("leftForward")
+def leftBackward():
   GPIO.output(MOTOR1, False)
   GPIO.output(MOTOR2, True)
-  time.sleep(5)
+  print("leftBackward")
+def leftStop():
   GPIO.output(MOTOR1, True)
   GPIO.output(MOTOR2, True)
-  
-drive()
-# GPIO.output(ENA1, True)
-# GPIO.output(MOTOR1, True)
-# GPIO.output(MOTOR2, False)
-print("run motors")
+  print("leftStop")
+def rightForward():
+  GPIO.output(MOTOR3, True)
+  GPIO.output(MOTOR4, False)
+  print("rightForward")
+def rightBackward():
+  GPIO.output(MOTOR3, False)
+  GPIO.output(MOTOR4, True)
+  print("rightBackward")
+def rightStop():
+  GPIO.output(MOTOR3, True)
+  GPIO.output(MOTOR4, True)
+  print("rightStop")
+def forward():
+  leftForward()
+  rightForward()
+  print("forward")
+def backward():
+  leftBackward()
+  rightBackward()
+  print("backward")
+def stop():
+  leftStop()
+  rightStop()
+forward()
 time.sleep(5)
+backward()
+time.sleep(5)
+stop()
