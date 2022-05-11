@@ -43,17 +43,15 @@ def lineDetect():
     while(True):
         ret, image = camera.read()
         image = cv2.resize(image,(600,600))
-        
-        gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-        rotate = cv2.rotate(gray, cv2.ROTATE_180)
-
-        blurred = cv2.GaussianBlur(gray, (5, 5), 0)
-        edged = cv2.Canny(blurred, 85, 85)
+        rotate = cv2.rotate(image, cv2.ROTATE_180)
+        gray = cv2.cvtColor(rotate, cv2.COLOR_BGR2GRAY)
+        blurred = cv2.GaussianBlur(rotate, (9, 9), 0)
+        edged = cv2.Canny(blurred, 95, 95)
         lines = cv2.HoughLinesP(edged,1,np.pi/180,10,minLineLength,maxLineGap)
         if(np.any(lines) != None):
             for x in range(0, len(lines)):
                 for x1,y1,x2,y2 in lines[x]:
-                    cv2.line(image,(x1,y1),(x2,y2),(0,255,0),2)
+                    cv2.line(rotate,(x1,y1),(x2,y2),(0,255,0),2)
                     theta=theta+math.atan2((y2-y1),(x2-x1))
 
         threshold=6
@@ -70,7 +68,7 @@ def lineDetect():
         print(direction)#print(theta)GPIO pins were connected to arduino for servo steering control
         theta = 0
         cv2.imshow("Edges",edged)
-        cv2.imshow("Frame",image)
+        cv2.imshow("Frame",rotate)
         key = cv2.waitKey(1) & 0xFF
         #image.truncate(0)#print(theta)GPIO pins were connected to arduino for servo steering control
         if key == ord("q"):
