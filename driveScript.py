@@ -19,6 +19,7 @@ MOTOR1 = 37 # LEFT
 MOTOR2 = 31 # LEFT
 MOTOR3 = 33 # RIGHT
 MOTOR4 = 35 # RIGHT
+KILLSWITCH = 15
 # if distance is greater than 15 cm shouldStop == 0 else shouldStop == 1
 # Declare the GPIO settings
 GPIO.setmode(GPIO.BOARD)
@@ -29,6 +30,7 @@ GPIO.setup(MOTOR1,GPIO.OUT)
 GPIO.setup(MOTOR2,GPIO.OUT)
 GPIO.setup(MOTOR3,GPIO.OUT)
 GPIO.setup(MOTOR4,GPIO.OUT)
+GPIO.setup(KILLSWITCH,GPIO.IN)
 
 print("Waiting For Sensor To Settle")
 time.sleep(5)
@@ -143,5 +145,7 @@ def stop():
     print("stop")
 
 #main#
-lineDetect()
+while GPIO.input(KILLSWITCH) == 1:
+    lineDetect()
 #forward()
+print("kill")
