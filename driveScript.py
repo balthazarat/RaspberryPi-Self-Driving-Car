@@ -15,8 +15,8 @@ distance1 = 0
 direction = "stop"
 TRIG = 16
 ECHO = 18
-MOTOR1 = 31 # LEFT
-MOTOR2 = 37 # LEFT
+MOTOR1 = 37 # LEFT
+MOTOR2 = 31 # LEFT
 MOTOR3 = 33 # RIGHT
 MOTOR4 = 35 # RIGHT
 # if distance is greater than 15 cm shouldStop == 0 else shouldStop == 1
@@ -31,7 +31,7 @@ GPIO.setup(MOTOR3,GPIO.OUT)
 GPIO.setup(MOTOR4,GPIO.OUT)
 
 print("Waiting For Sensor To Settle")
-time.sleep(10)
+time.sleep(5)
 
 # **sees lines and tells direction, sees distance and tells it to stop** #
 def lineDetect():
@@ -58,16 +58,18 @@ def lineDetect():
         if(theta>threshold):
             direction = "left"
             leftForward()
+            rightStop()
         if(abs(theta)<threshold):
             direction = "straight"
             forward()
         if(theta<-threshold):
             direction = "right"
             rightForward()
+            leftStop()
         testDistance()
         print(direction)#print(theta)GPIO pins were connected to arduino for servo steering control
         theta = 0
-        cv2.imshow("Edges",edged)
+        # cv2.imshow("Edges",edged)
         cv2.imshow("Frame",rotate)
         key = cv2.waitKey(1) & 0xFF
         #image.truncate(0)#print(theta)GPIO pins were connected to arduino for servo steering control
@@ -107,10 +109,10 @@ def leftForward():
     GPIO.output(MOTOR1, True)
     GPIO.output(MOTOR2, False)
     print("leftForward")
-def leftBackward():
+"""def leftBackward():
     GPIO.output(MOTOR1, False)
     GPIO.output(MOTOR2, True)
-    print("leftBackward")
+    print("leftBackward")"""
 def leftStop():
     GPIO.output(MOTOR1, True)
     GPIO.output(MOTOR2, True)
@@ -119,10 +121,10 @@ def rightForward():
     GPIO.output(MOTOR3, True)
     GPIO.output(MOTOR4, False)
     print("rightForward")
-def rightBackward():
+"""def rightBackward():
     GPIO.output(MOTOR3, False)
     GPIO.output(MOTOR4, True)
-    print("rightBackward")
+    print("rightBackward")"""
 def rightStop():
     GPIO.output(MOTOR3, True)
     GPIO.output(MOTOR4, True)
@@ -131,10 +133,10 @@ def forward():
     leftForward()
     rightForward()
     print("forward")
-def backward():
+"""def backward():
     leftBackward()
     rightBackward()
-    print("backward")
+    print("backward")"""
 def stop():
     leftStop()
     rightStop()
@@ -142,3 +144,4 @@ def stop():
 
 #main#
 lineDetect()
+#forward()
