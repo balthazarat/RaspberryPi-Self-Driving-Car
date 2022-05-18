@@ -149,3 +149,4 @@ while GPIO.input(KILLSWITCH) == 1:
     lineDetect()
 #forward()
 print("kill")
+stop()
