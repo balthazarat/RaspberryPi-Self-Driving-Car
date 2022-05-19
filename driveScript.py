@@ -56,18 +56,18 @@ def lineDetect():
                     cv2.line(rotate,(x1,y1),(x2,y2),(0,255,0),2)
                     theta=theta+math.atan2((y2-y1),(x2-x1))
 
-        threshold=6
+        threshold=4
         if(theta>threshold):
-            direction = "left"
-            leftForward()
-            rightStop()
+            direction = "right"
+            rightForward()
+            leftStop()
         if(abs(theta)<threshold):
             direction = "straight"
             forward()
         if(theta<-threshold):
-            direction = "right"
-            rightForward()
-            leftStop()
+            direction = "left"
+            leftForward()
+            rightStop()
         testDistance()
         print(direction)#print(theta)GPIO pins were connected to arduino for servo steering control
         theta = 0
